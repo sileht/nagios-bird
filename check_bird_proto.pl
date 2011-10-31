@@ -32,7 +32,7 @@ $np->add_arg(
 $np->getopts;
 
 # Handle timeouts (also triggers on invalid command)
-$SIG{ALRM} = sub { $np->nagios_exit(CRITICAL, "Timeout (possibly invalid command)") };
+$SIG{ALRM} = sub { $np->nagios_exit(CRITICAL, "Timeout (possibly invalid command)|routes=0;1;0;;") };
 alarm $np->opts->timeout;
 
 eval q{
@@ -50,10 +50,10 @@ eval q{
   # Check status
   if ($status[3] ne "up") {
     if ($status[5]) {
-      $np->nagios_exit(CRITICAL, "Protocol $status[0] is $status[3] - info: $status[5]");
+      $np->nagios_exit(CRITICAL, "Protocol $status[0] is $status[3] - info: $status[5]|routes=0;1;0;;");
     }
     else {
-      $np->nagios_exit(CRITICAL, "Protocol $status[0] is $status[3] - info: Protocol Down");
+      $np->nagios_exit(CRITICAL, "Protocol $status[0] is $status[3] - info: Protocol Down|routes=0;1;0;;");
     }
   }
 
@@ -64,7 +64,7 @@ eval q{
   # Final status
   $np->nagios_exit(
     $np->opts->zero && $1 eq "0" ? CRITICAL : OK,
-    "Protocol $status[0] is $status[3] - $1 routes imported."
+    "Protocol $status[0] is $status[3] - $1 routes imported.|routes=$1;1;0;;"
   );
 };
 if ($@) { $np->nagios_exit(CRITICAL, $@); }
