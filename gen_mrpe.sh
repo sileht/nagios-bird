@@ -32,9 +32,10 @@ case "$1" in
         cp -f /tmp/tmp_mrpe.cfg /etc/check_mk/mrpe.cfg
         exit 0
         ;;
-    *)
+    -s)
         cat /tmp/tmp_mrpe.cfg
         exit 0
         ;;
 esac
+echo "Unknown options $1"
 exit 3
