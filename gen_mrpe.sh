@@ -14,7 +14,7 @@ done
 
 case "$1" in
     -d|--diff)
-        diff -uNr <(grep ^BGP /etc/check_mk/mrpe.cfg) /tmp/tmp_mrpe.cfg 
+        diff -uNr <(grep -e ^BGP -e ^SESSIONS_BGP /etc/check_mk/mrpe.cfg) /tmp/tmp_mrpe.cfg 
         exit 0
         ;;
     -t)
