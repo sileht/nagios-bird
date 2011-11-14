@@ -1,7 +1,7 @@
 #!/bin/bash
 
 {
-echo "BGP_SESSIONS /etc/check_mk/nagios-bird/gen_mrpe.sh -t" 
+echo "SESSIONS_BGP /etc/check_mk/nagios-bird/gen_mrpe.sh -t" 
 
 for i in $(echo show protocols | birdc  | awk '/Established/{if ($2 == "BGP") print $1}' | grep -v TETANEUTRAL); do
     echo "BGP_$i /etc/check_mk/nagios-bird/check_bird_proto.sh $i"
