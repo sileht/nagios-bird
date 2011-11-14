@@ -22,7 +22,7 @@ case "$1" in
         nb_bgp=$(grep -c 'check_bird_proto' /etc/check_mk/mrpe.cfg)
         if [ "$data" ] ; then
             echo "$nb_bgp actives BGP sessions, New BGP session discover: $data"
-            exit 2
+            exit 1
         else
             echo "$nb_bgp actives BGP sessions"
             exit 0
