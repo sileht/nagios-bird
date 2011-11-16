@@ -3,7 +3,7 @@
 PROTO=$1
 VERIFY_CACHE=/tmp/nagios-bird-$PROTO
 
-if [ ! -f $VERIFY_CACHE ] || find $VERIFY_CACHE -mmin +60 | grep $VERIFY_CACHE
+if [ ! -f $VERIFY_CACHE ] || find $VERIFY_CACHE -mmin +60 | grep $VERIFY_CACHE > /dev/null
 then
     cd $(dirname $0)
     ./check_bird_proto.pl -p "$PROTO" > $VERIFY_CACHE
